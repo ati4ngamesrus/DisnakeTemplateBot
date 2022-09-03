@@ -1,23 +1,15 @@
 import disnake as discord
 from disnake.ext import commands
 
-
-
-
 token = "YOUR BOT TOKEN" 
 bot = commands.Bot(command_prefix='/') 
 bot.remove_command('help') 
 
 
-
-
 @bot.event
 async def on_ready():
-await bot.change_presence(status=discord.Status.dnd, activity=discord.Activity(type=discord.ActivityType.listening, name="slash commands"))
-print('Bot is working!')
-
-
-
+	await bot.change_presence(status=discord.Status.dnd, activity=discord.Activity(type=discord.ActivityType.listening, name="slash commands"))
+	print('Bot is working!')
 
 
 @bot.slash_command(description="Clear up to 1000 messages")
@@ -41,9 +33,6 @@ async def clear( ctx, amount:int = None):
         await ctx.response.send_message(embed=Embed)
 
 
-
-
-
 @bot.slash_command(description="Play pop it, why not?")
 async def popit(ctx):
  		cpage = discord.Embed(
@@ -60,21 +49,9 @@ async def popit(ctx):
  	await ctx.send(embed=cpage)
  	
 
-
-
-
-
 @bot.slash_command(description="Say text")
 async def echo(ctx, message=None):
     await ctx.send(message)
-
-
-
-
-
-
-
-
 
 @bot.slash_command(description="Run code in Python environment. Only available to the bot developer")
 async def eval(ctx, *, code):
@@ -144,9 +121,5 @@ async def eval(ctx, *, code):
         fail_embed = discord.Embed(title = 'Error!', color = discord.Colour.from_rgb(255, 0, 0))
         fail_embed.add_field(name = 'Execute code:', value = f'```py\nThe code is hidden for security purposes\n```', inline = False)
         fail_embed.add_field(name = 'Error:', value = f'```\nYou must have the following permissions to run this command:Bot developer\n```', inline = False)
-
-
-
-
 
 bot.run(token)	
